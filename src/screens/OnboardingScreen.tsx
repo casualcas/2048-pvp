@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  View, Text, StyleSheet, TextInput,
+  View, Text, StyleSheet,
   TouchableOpacity, KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,7 +12,6 @@ interface Props {
 }
 
 export function OnboardingScreen({ onStart, loading }: Props) {
-  const [nickname, setNickname] = useState('');
   const { connectWallet, loading: walletLoading } = useWalletAuth();
 
   const handleWalletConnect = async () => {
@@ -21,11 +20,6 @@ export function OnboardingScreen({ onStart, loading }: Props) {
       const shortKey = pubkey.slice(0, 4) + '...' + pubkey.slice(-4);
       onStart(shortKey);
     }
-  };
-
-  const handleStart = () => {
-    const name = nickname.trim() || 'Player' + Math.floor(Math.random() * 9999);
-    onStart(name);
   };
 
   return (
@@ -42,32 +36,6 @@ export function OnboardingScreen({ onStart, loading }: Props) {
         <Text style={styles.desc}>Real-time 2048 battles on Solana</Text>
 
         <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            value={nickname}
-            onChangeText={setNickname}
-            placeholder="Enter your nickname..."
-            placeholderTextColor="#bbada0"
-            maxLength={16}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-          <TouchableOpacity
-            onPress={handleStart}
-            disabled={loading}
-            style={[styles.startBtn, loading && styles.disabled]}
-          >
-            <Text style={styles.startBtnText}>
-              {loading ? 'Loading...' : '▶  Start Playing'}
-            </Text>
-          </TouchableOpacity>
-
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>OR</Text>
-            <View style={styles.dividerLine} />
-          </View>
-
           <TouchableOpacity
             onPress={handleWalletConnect}
             disabled={walletLoading}
