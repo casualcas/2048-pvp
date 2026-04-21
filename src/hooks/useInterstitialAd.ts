@@ -13,7 +13,7 @@ export function useInterstitialAd(onAdClosed?: () => void) {
     try {
       const { InterstitialAd, AdEventType } = await import('react-native-google-mobile-ads');
       const ad = InterstitialAd.createForAdRequest(
-        'ca-app-pub-7052877159805288/9154678741',
+        'ca-app-pub-7052877159805288/3147955436',
         { requestNonPersonalizedAdsOnly: true }
       );
       ad.addAdEventListener(AdEventType.LOADED, () => {
