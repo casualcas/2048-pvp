@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin: 0; padding: 0; }
+body { width: 1024px; height: 500px; overflow: hidden; }
+.banner {
+  width: 1024px; height: 500px;
+  background: linear-gradient(135deg, #F9F6F0 0%, #EDE0D0 100%);
+  display: flex; align-items: center;
+  font-family: Georgia, serif;
+}
+.left {
+  width: 420px; padding: 40px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.tile-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; width: 200px;
+}
+.tile {
+  width: 96px; height: 96px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; font-weight: 900;
+}
+.t1 { background: #F65E3B; color: white; }
+.t2 { background: #EAB84A; color: #7A5200; }
+.t3 { background: #4CAF82; color: white; }
+.t4 { background: #378ADD; color: white; }
+.title { font-size: 64px; font-weight: 900; color: #333; }
+.title span { color: #F65E3B; }
+.subtitle { font-size: 14px; color: #999; letter-spacing: 3px; font-family: Arial; }
+.right {
+  flex: 1; padding: 40px;
+  border-left: 2px solid #E0D5C5;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.feature { display: flex; align-items: center; gap: 16px; }
+.feat-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.feat-title { font-size: 18px; font-weight: 700; color: #222; font-family: Arial; }
+.feat-desc { font-size: 13px; color: #999; margin-top: 2px; font-family: Arial; }
+.divider { border: none; border-top: 1px solid #E0D5C5; }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="left">
+    <div class="tile-grid">
+      <div class="tile t1">20</div>
+      <div class="tile t2">48</div>
+      <div class="tile t3">8</div>
+      <div class="tile t4">16</div>
+    </div>
+    <div>
+      <div class="title"><span>2048</span><br>BATTLE</div>
+      <div class="subtitle">REAL-TIME PvP PUZZLE</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="feature">
+      <div class="feat-icon" style="background:#FEF0EB">⚔️</div>
+      <div>
+        <div class="feat-title">Real-time PvP</div>
+        <div class="feat-desc">Challenge players worldwide</div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="feature">
+      <div class="feat-icon" style="background:#FDF6E3">🏆</div>
+      <div>
+        <div class="feat-title">ELO Rankings</div>
+        <div class="feat-desc">Climb the global leaderboard</div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="feature">
+      <div class="feat-icon" style="background:#EBF7F1">🤖</div>
+      <div>
+        <div class="feat-title">Bot Battles</div>
+        <div class="feat-desc">Easy, Medium & Hard AI</div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="feature">
+      <div class="feat-icon" style="background:#EBF3FD">🎨</div>
+      <div>
+        <div class="feat-title">Unique Skins</div>
+        <div class="feat-desc">Unlock exclusive tile designs</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
