@@ -73,7 +73,7 @@ export function ProfileScreen({ player, onBack, onNicknameChange, onAchievements
       </View>
 
       <TouchableOpacity onPress={onSignOut} style={styles.signOutBtn}>
-        <Text style={styles.signOutText}>🚪 Sign Out</Text>
+        <Text style={styles.signOutText}>◎ Disconnect Wallet</Text>
       </TouchableOpacity>
 
       <FlatList
