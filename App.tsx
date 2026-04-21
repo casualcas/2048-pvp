@@ -71,7 +71,12 @@ export default function App() {
         MobileAds().initialize().catch((e: any) => console.warn('AdMob init error:', e));
       }).catch(() => {});
     }
-    loadSavedWallet();
+    loadSavedWallet().then(async (saved) => {
+      if (saved && !player) {
+        const shortKey = saved.slice(0, 6) + '...' + saved.slice(-4);
+        await createPlayer(shortKey);
+      }
+    });
     loadAd();
     soundManager.init().then(() => {
       console.log('Sound initialized OK');

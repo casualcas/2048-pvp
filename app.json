@@ -27,6 +27,21 @@
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "com.pvp2048.app"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
       ]
     },
     "web": {
@@ -51,7 +66,7 @@
         "projectId": "985c078a-252a-4502-b603-e149201791ad"
       }
     },
-    "scheme": "com.battle2048.app",
+    "scheme": "com.pvp2048.app",
     "owner": "nininbini",
     "backgroundColor": "#1a1a2e"
   }

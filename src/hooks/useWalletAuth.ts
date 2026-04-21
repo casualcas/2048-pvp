@@ -15,11 +15,11 @@ export function useWalletAuth() {
     try {
       const result = await transact(async (wallet) => {
         const authResult = await wallet.authorize({
-          cluster: 'mainnet-beta',
+          cluster: __DEV__ ? 'devnet' : 'mainnet-beta',
           identity: {
             name: '2048 PvP',
-            uri: 'https://casualcas.github.io/2048-pvp',
-            icon: '/assets/icon.png',
+            uri: 'https://casualcas.github.io/2048-pvp/',
+            icon: 'https://casualcas.github.io/2048-pvp/assets/icon.png',
           },
         });
         const address = authResult.accounts[0].address;

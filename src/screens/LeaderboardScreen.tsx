@@ -36,7 +36,11 @@ export function LeaderboardScreen({ currentPlayerId, onBack }: Props) {
         <Text style={styles.rank}>{medal}</Text>
         <View style={styles.info}>
           <Text style={[styles.nickname, isMe && styles.nicknameMe]}>
-            {item.nickname} {isMe ? '(YOU)' : ''}
+            {item.nickname.includes('...') 
+              ? item.nickname 
+              : item.nickname.length > 12 
+                ? item.nickname.slice(0, 6) + '...' + item.nickname.slice(-4)
+                : item.nickname} {isMe ? '(YOU)' : ''}
           </Text>
           <Text style={styles.stats}>
             🎮 {item.total_games} · 🏆 {item.total_wins} · 📊 {item.win_rate}%
