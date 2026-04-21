@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 import { PublicKey } from '@solana/web3.js';
+import { Buffer } from 'buffer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WALLET_KEY = 'wallet_pubkey_2048pvp';
@@ -21,9 +22,11 @@ export function useWalletAuth() {
             icon: '/assets/icon.png',
           },
         });
-        return authResult.accounts[0].address;
+        const address = authResult.accounts[0].address;
+        const pubkeyBytes = Buffer.from(address, 'base64');
+        return new PublicKey(pubkeyBytes).toBase58();
       });
-      const pubkey = new PublicKey(result).toBase58();
+      const pubkey = result as string;
       await AsyncStorage.setItem(WALLET_KEY, pubkey);
       setWalletAddress(pubkey);
       return pubkey;
