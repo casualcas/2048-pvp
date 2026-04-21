@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, Alert, Clipboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Player } from '../hooks/usePlayer';
 import { supabase } from '../utils/supabase';
@@ -25,9 +25,10 @@ interface Props {
   onSignOut: () => void;
   unlockedCount: number;
   totalAchievements: number;
+  walletAddress?: string | null;
 }
 
-export function ProfileScreen({ player, onBack, onNicknameChange, onAchievements, onSkins, onSignOut, unlockedCount, totalAchievements }: Props) {
+export function ProfileScreen({ player, onBack, onNicknameChange, onAchievements, onSkins, onSignOut, unlockedCount, totalAchievements, walletAddress }: Props) {
   const [editing, setEditing] = useState(false);
   const [nickname, setNickname] = useState(player.nickname);
   const [history, setHistory] = useState<MatchHistoryItem[]>([]);
@@ -71,6 +72,22 @@ export function ProfileScreen({ player, onBack, onNicknameChange, onAchievements
         <Text style={styles.title}>{t('profile')}</Text>
         <View style={styles.placeholder} />
       </View>
+
+      {walletAddress && (
+        <TouchableOpacity
+          onPress={() => {
+            Clipboard.setString(walletAddress);
+            Alert.alert('Copied!', 'Wallet address copied to clipboard');
+          }}
+          style={styles.walletBox}
+        >
+          <Text style={styles.walletLabel}>◎ Wallet</Text>
+          <Text style={styles.walletAddr}>
+            {walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4)}
+          </Text>
+          <Text style={styles.walletCopy}>tap to copy</Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity onPress={onSignOut} style={styles.signOutBtn}>
         <Text style={styles.signOutText}>◎ Disconnect Wallet</Text>
@@ -192,6 +209,13 @@ const styles = StyleSheet.create({
   saveBtn: { backgroundColor: theme.colors.accent1, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 6 },
   saveBtnText: { color: '#fff', fontWeight: '900', fontSize: 16 },
   eloText: { fontSize: 18, fontWeight: '800', color: theme.colors.accent1 },
+  walletBox: {
+    backgroundColor: '#1a1a2e', borderRadius: 14,
+    padding: 14, alignItems: 'center', marginBottom: 8,
+  },
+  walletLabel: { color: '#9945FF', fontSize: 12, fontWeight: '700', letterSpacing: 2 },
+  walletAddr: { color: '#fff', fontSize: 18, fontWeight: '800', marginTop: 4 },
+  walletCopy: { color: '#555', fontSize: 11, marginTop: 4 },
   signOutBtn: {
     marginHorizontal: 20, marginBottom: 8, backgroundColor: theme.colors.bgCard,
     borderRadius: 12, paddingVertical: 12, alignItems: 'center',

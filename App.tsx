@@ -60,7 +60,7 @@ export default function App() {
   const { noAds, purchaseNoAds } = useNoAds();
   const { achievements, checkAchievements, unlockedCount } = useAchievements();
   const { selectedSkin, ownedSkinIds, selectSkin, purchaseSkin, isSkinOwned } = useSkins();
-  const { disconnectWallet } = useWalletAuth();
+  const { disconnectWallet, loadSavedWallet, walletAddress } = useWalletAuth();
   const { updateProgress } = useDailyTasks();
   const { scheduleEnergyNotification, scheduleDailyBonusNotification } = useNotifications();
   const { loadAd, showAfterMatch } = useInterstitialAd(() => setScreen('result'));
@@ -73,6 +73,7 @@ export default function App() {
         MobileAds().initialize().catch((e: any) => console.warn('AdMob init error:', e));
       }).catch(() => {});
     }
+    loadSavedWallet();
     loadAd();
     soundManager.init().then(() => {
       console.log('Sound initialized OK');
@@ -310,7 +311,8 @@ export default function App() {
           onBack={() => setScreen('home')}
           onNicknameChange={(nickname) => { player.nickname = nickname; }}
           onAchievements={() => setScreen('achievements')}
-          onSkins={() => setScreen('skins')}
+          onSkins={() => {}}
+          walletAddress={walletAddress}
           onSignOut={async () => { await disconnectWallet(); await resetPlayer(); setScreen('home'); }}
           unlockedCount={unlockedCount}
           totalAchievements={achievements.length}
@@ -350,9 +352,9 @@ export default function App() {
           onHome={() => setScreen('home')}
         />
       )}
-      {['home', 'leaderboard', 'profile', 'achievements', 'skins'].includes(screen) && (
+      {['home', 'leaderboard', 'profile', 'achievements'].includes(screen) && (
         <BottomNav
-          active={screen === 'leaderboard' ? 'leaders' : screen === 'achievements' || screen === 'skins' ? 'profile' : screen as any}
+          active={screen === 'leaderboard' ? 'leaders' : screen === 'achievements' ? 'profile' : screen as any}
           onHome={() => setScreen('home')}
           onLeaders={() => setScreen('leaderboard')}
           onProfile={() => setScreen('profile')}

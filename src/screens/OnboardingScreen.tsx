@@ -17,7 +17,7 @@ export function OnboardingScreen({ onStart, loading }: Props) {
   const handleWalletConnect = async () => {
     const pubkey = await connectWallet();
     if (pubkey) {
-      const shortKey = pubkey.slice(0, 4) + '...' + pubkey.slice(-4);
+      const shortKey = pubkey.slice(0, 6) + '...' + pubkey.slice(-4);
       onStart(shortKey);
     }
   };
