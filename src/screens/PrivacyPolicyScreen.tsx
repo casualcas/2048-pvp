@@ -22,7 +22,7 @@ export function PrivacyPolicyScreen({ onBack }: Props) {
         <Text style={styles.updated}>Last updated: April 2026</Text>
 
         <Text style={styles.sectionTitle}>1. Information We Collect</Text>
-        <Text style={styles.text}>2048 Battle collects minimal information to provide our services: nickname, device ID, game statistics, and app settings.</Text>
+        <Text style={styles.text}>2048 PvP collects minimal information to provide our services: nickname, device ID, game statistics, and app settings.</Text>
 
         <Text style={styles.sectionTitle}>2. How We Use Your Information</Text>
         <Text style={styles.text}>We use collected information to enable multiplayer matchmaking, display leaderboards, save your game progress, and improve game performance.</Text>
@@ -31,10 +31,10 @@ export function PrivacyPolicyScreen({ onBack }: Props) {
         <Text style={styles.text}>Your data is stored securely using Supabase cloud services. Local data is stored on your device using AsyncStorage. We do not sell your data to third parties.</Text>
 
         <Text style={styles.sectionTitle}>4. Advertising</Text>
-        <Text style={styles.text}>2048 Battle uses Google AdMob to display advertisements. AdMob may collect device information and advertising ID to show relevant ads. You can opt out of personalized ads in your device settings.</Text>
+        <Text style={styles.text}>2048 PvP uses Google AdMob to display advertisements. AdMob may collect device information and advertising ID to show relevant ads. You can opt out of personalized ads in your device settings.</Text>
 
         <Text style={styles.sectionTitle}>5. Children Privacy</Text>
-        <Text style={styles.text}>2048 Battle is not directed to children under 13. We do not knowingly collect personal information from children under 13.</Text>
+        <Text style={styles.text}>2048 PvP is not directed to children under 13. We do not knowingly collect personal information from children under 13.</Text>
 
         <Text style={styles.sectionTitle}>6. Data Deletion</Text>
         <Text style={styles.text}>You can request deletion of your data by contacting us at support@2048battle.app. You can also clear local data by uninstalling the app.</Text>

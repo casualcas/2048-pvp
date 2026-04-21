@@ -88,7 +88,7 @@ export function SettingsScreen({ onBack, onPrivacyPolicy }: Props) {
           <View style={styles.rowLeft}>
             <Text style={styles.rowIcon}>🎮</Text>
             <View>
-              <Text style={styles.rowTitle}>2048 Battle</Text>
+              <Text style={styles.rowTitle}>2048 PvP</Text>
               <Text style={styles.rowSub}>{t('version')}</Text>
             </View>
           </View>
