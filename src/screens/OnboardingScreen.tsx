@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import {
   View, Text, StyleSheet,
   TouchableOpacity, KeyboardAvoidingView, Platform,
@@ -15,10 +16,20 @@ export function OnboardingScreen({ onStart, loading }: Props) {
   const { connectWallet, loading: walletLoading } = useWalletAuth();
 
   const handleWalletConnect = async () => {
-    const pubkey = await connectWallet();
-    if (pubkey) {
-      const shortKey = pubkey.slice(0, 6) + '...' + pubkey.slice(-4);
-      onStart(shortKey);
+    try {
+      const pubkey = await connectWallet();
+      if (pubkey) {
+        const shortKey = pubkey.slice(0, 6) + '...' + pubkey.slice(-4);
+        onStart(shortKey);
+      }
+    } catch (e: any) {
+      if (e?.message === 'NO_WALLET') {
+        Alert.alert(
+          'No Wallet Found',
+          'Please install Phantom, Solflare or another Solana wallet to continue.',
+          [{ text: 'OK' }]
+        );
+      }
     }
   };
 

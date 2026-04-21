@@ -13,15 +13,13 @@ import { SettingsScreen } from './src/screens/SettingsScreen';
 import { PrivacyPolicyScreen } from './src/screens/PrivacyPolicyScreen';
 import { AchievementsScreen } from './src/screens/AchievementsScreen';
 import { useAchievements } from './src/hooks/useAchievements';
-import { useSkins } from './src/hooks/useSkins';
-import { SkinsScreen } from './src/screens/SkinsScreen';
 import { useDailyTasks } from './src/hooks/useDailyTasks';
 import { ProfileScreen } from './src/screens/ProfileScreen';
 import { usePlayer } from './src/hooks/usePlayer';
 import { getEloDiff } from './src/game/elo';
 import { supabase } from './src/utils/supabase';
 import { useEnergy } from './src/hooks/useEnergy';
-import { useNoAds } from './src/hooks/useNoAds';
+
 import { useRewardedAd } from './src/hooks/useRewardedAd';
 import { useDailyBonus } from './src/hooks/useDailyBonus';
 import { soundManager } from './src/utils/soundManager';
@@ -57,9 +55,9 @@ export default function App() {
   const { energy, maxEnergy, useEnergy: spendEnergy, addEnergy, getTimeUntilRegen } = useEnergy();
   const { canClaim, streak, nextBonus, claimBonus } = useDailyBonus();
   const { settings } = useSettings();
-  const { noAds, purchaseNoAds } = useNoAds();
+  const noAds = false;
   const { achievements, checkAchievements, unlockedCount } = useAchievements();
-  const { selectedSkin, ownedSkinIds, selectSkin, purchaseSkin, isSkinOwned } = useSkins();
+  const selectedSkin = null; const ownedSkinIds: string[] = [];
   const { disconnectWallet, loadSavedWallet, walletAddress } = useWalletAuth();
   const { updateProgress } = useDailyTasks();
   const { scheduleEnergyNotification, scheduleDailyBonusNotification } = useNotifications();
@@ -141,7 +139,6 @@ export default function App() {
             else if (product === 'energy_unlimited') addEnergy(999);
           }}
           noAds={noAds}
-          onRemoveAds={purchaseNoAds}
           adLoaded={adLoaded}
           onSettings={() => setScreen('settings')}
           onProfile={() => setScreen('profile')}
@@ -286,16 +283,7 @@ export default function App() {
         <SettingsScreen onBack={() => setScreen('home')} onPrivacyPolicy={() => setScreen('privacy')} />
       )}
 
-      {screen === 'skins' && (
-        <SkinsScreen
-          selectedSkinId={selectedSkin.id}
-          ownedSkinIds={ownedSkinIds}
-          onSelect={selectSkin}
-          onPurchase={purchaseSkin}
-          onBack={() => setScreen('profile')}
-          isVip={noAds}
-        />
-      )}
+      
 
       {screen === 'achievements' && (
         <AchievementsScreen

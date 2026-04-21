@@ -47,6 +47,10 @@ export function usePlayer() {
         win_streak: 0,
         best_streak: 0,
       };
+      // Если никнейм выглядит как wallet address — используем его как device_id тоже
+      if (nickname.includes('...')) {
+        newPlayer.device_id = nickname.replace('...', '_');
+      }
 
       // Пробуем сохранить в Supabase
       try {

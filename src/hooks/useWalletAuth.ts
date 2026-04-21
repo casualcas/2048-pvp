@@ -30,8 +30,11 @@ export function useWalletAuth() {
       await AsyncStorage.setItem(WALLET_KEY, pubkey);
       setWalletAddress(pubkey);
       return pubkey;
-    } catch (e) {
+    } catch (e: any) {
       console.warn('Wallet connect error:', e);
+      if (e?.message?.includes('No wallet found') || e?.errorCode === 'ERROR_WALLET_NOT_FOUND') {
+        throw new Error('NO_WALLET');
+      }
       return null;
     } finally {
       setLoading(false);
