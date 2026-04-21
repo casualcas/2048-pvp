@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../i18n/useLanguage';
-import { useGoogleAuth } from '../hooks/useGoogleAuth';
+import { useWalletAuth } from '../hooks/useWalletAuth';
 
 interface Props {
   onStart: (nickname: string) => void;
@@ -15,13 +15,13 @@ interface Props {
 export function OnboardingScreen({ onStart, loading }: Props) {
   const [nickname, setNickname] = useState('');
   const { t } = useLanguage();
-  const { signInWithGoogle, loading: googleLoading } = useGoogleAuth();
+  const { connectWallet, loading: walletLoading } = useWalletAuth();
 
-  const handleGoogleSignIn = async () => {
-    const user = await signInWithGoogle();
-    if (user) {
-      const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Player';
-      onStart(name);
+  const handleWalletConnect = async () => {
+    const pubkey = await connectWallet();
+    if (pubkey) {
+      const shortKey = pubkey.slice(0, 4) + '...' + pubkey.slice(-4);
+      onStart(shortKey);
     }
   };
 
@@ -69,12 +69,12 @@ export function OnboardingScreen({ onStart, loading }: Props) {
           </View>
 
           <TouchableOpacity
-            onPress={handleGoogleSignIn}
-            disabled={googleLoading}
-            style={[styles.googleBtn, googleLoading && styles.startBtnDisabled]}
+            onPress={handleWalletConnect}
+            disabled={walletLoading}
+            style={[styles.googleBtn, walletLoading && styles.startBtnDisabled]}
           >
             <Text style={styles.googleBtnText}>
-              {googleLoading ? '...' : '🔑 Sign in with Google'}
+              {walletLoading ? '...' : '👛 Connect Solana Wallet'}
             </Text>
           </TouchableOpacity>
         </View>
