@@ -31,7 +31,7 @@ import { BottomNav } from './src/components/BottomNav';
 import { useNotifications } from './src/hooks/useNotifications';
 import { useInterstitialAd } from './src/hooks/useInterstitialAd';
 import { useSettings, SettingsProvider } from './src/hooks/useSettings';
-import { useGoogleAuth } from './src/hooks/useGoogleAuth';
+import { useWalletAuth } from './src/hooks/useWalletAuth';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, AppState } from 'react-native';
 
 type Screen = 'home' | 'matchmaking' | 'pvp' | 'bot' | 'solo' | 'result' | 'leaderboard' | 'settings' | 'privacy' | 'profile' | 'achievements' | 'skins';
@@ -60,7 +60,7 @@ export default function App() {
   const { noAds, purchaseNoAds } = useNoAds();
   const { achievements, checkAchievements, unlockedCount } = useAchievements();
   const { selectedSkin, ownedSkinIds, selectSkin, purchaseSkin, isSkinOwned } = useSkins();
-  const { signOut } = useGoogleAuth();
+  const { disconnectWallet } = useWalletAuth();
   const { updateProgress } = useDailyTasks();
   const { scheduleEnergyNotification, scheduleDailyBonusNotification } = useNotifications();
   const { loadAd, showAfterMatch } = useInterstitialAd(() => setScreen('result'));
@@ -311,7 +311,7 @@ export default function App() {
           onNicknameChange={(nickname) => { player.nickname = nickname; }}
           onAchievements={() => setScreen('achievements')}
           onSkins={() => setScreen('skins')}
-          onSignOut={async () => { await signOut(); await resetPlayer(); setScreen('home'); }}
+          onSignOut={async () => { await disconnectWallet(); await resetPlayer(); setScreen('home'); }}
           unlockedCount={unlockedCount}
           totalAchievements={achievements.length}
         />
