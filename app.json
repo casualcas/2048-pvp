@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1a1a2e"
     },
     "ios": {
       "supportsTablet": true,
@@ -52,6 +52,7 @@
       }
     },
     "scheme": "com.battle2048.app",
-    "owner": "nininbini"
+    "owner": "nininbini",
+    "backgroundColor": "#1a1a2e"
   }
 }
