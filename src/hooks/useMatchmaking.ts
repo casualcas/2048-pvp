@@ -28,6 +28,7 @@ export function useMatchmaking(player: Player) {
   const matchRef = useRef<Match | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const finishedRef = useRef(false);
+  const lastMatchTimeRef = useRef<number>(0);
 
   const clearSearchTimeout = () => {
     if (timeoutRef.current) {
@@ -37,6 +38,13 @@ export function useMatchmaking(player: Player) {
   };
 
   const findMatch = useCallback(async () => {
+    // Rate limiting — не чаще раза в 5 секунд
+    const now = Date.now();
+    if (now - lastMatchTimeRef.current < 5000) {
+      console.warn('Rate limit: too fast');
+      return;
+    }
+    lastMatchTimeRef.current = now;
     setStatus('searching');
     finishedRef.current = false;
 

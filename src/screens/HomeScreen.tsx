@@ -67,7 +67,9 @@ export function HomeScreen({ player, energy, maxEnergy, timeUntilRegen, onWatchA
         {/* Player card */}
         <TouchableOpacity onPress={handleProfile} style={styles.playerCard}>
           <View style={styles.playerInfo}>
-            <Text style={styles.playerName}>👤 {player.nickname}</Text>
+            <Text style={styles.playerName}>
+              {player.nickname.includes('...') ? '◎ ' : '👤 '}{player.nickname}
+            </Text>
             <Text style={styles.playerElo}>⚡ {player.elo} ELO</Text>
           </View>
           <View style={styles.playerStats}>

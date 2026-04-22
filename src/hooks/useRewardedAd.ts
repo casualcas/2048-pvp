@@ -3,8 +3,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 const IS_DEVELOPMENT = __DEV__;
 
 const REWARDED_AD_UNIT = IS_DEVELOPMENT
-  ? 'ca-app-pub-7052877159805288/1972580921'
-  : 'ca-app-pub-7052877159805288/9201211590';
+  ? 'ca-app-pub-3940256099/5224354917'
+  : 'ca-app-pub-7052877159805288/1972580921';
 
 export function useRewardedAd(onRewarded: () => void) {
   const [loaded, setLoaded] = useState(false);
