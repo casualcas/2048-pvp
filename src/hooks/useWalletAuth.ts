@@ -1,8 +1,14 @@
 import { useState, useCallback } from 'react';
-import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
+import { transact } from '@wallet-ui/react-native-web3js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WALLET_KEY = 'wallet_pubkey_2048pvp';
+
+const APP_IDENTITY = {
+  name: '2048 PvP',
+  uri: 'https://casualcas.github.io/2048-pvp/',
+  icon: 'https://casualcas.github.io/2048-pvp/assets/icon.png',
+};
 
 export function useWalletAuth() {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
@@ -11,28 +17,17 @@ export function useWalletAuth() {
   const connectWallet = useCallback(async (): Promise<string | null> => {
     setLoading(true);
     try {
-      const authResult = await transact(async (wallet) => {
-        return await wallet.authorize({
-          cluster: __DEV__ ? 'devnet' : 'mainnet-beta',
-          identity: {
-            name: '2048 PvP',
-            uri: 'https://casualcas.github.io/2048-pvp/',
-            icon: 'https://casualcas.github.io/2048-pvp/assets/icon.png',
-          },
+      const result = await transact(async (wallet) => {
+        const authResult = await wallet.authorize({
+          cluster: 'mainnet-beta',
+          identity: APP_IDENTITY,
         });
+        return authResult.accounts[0].address;
       });
 
-      console.log('Auth result keys:', Object.keys(authResult));
-      console.log('Accounts:', JSON.stringify(authResult.accounts));
+      const pubkey = result as string;
+      console.log('Connected wallet:', pubkey);
 
-      // publicKey доступен напрямую в web3js wrapper
-      const account = authResult.accounts[0];
-      const pubkey = (account as any).publicKey?.toBase58?.() 
-        || (account as any).address 
-        || '';
-      
-      console.log('Pubkey:', pubkey);
-      
       if (pubkey) {
         await AsyncStorage.setItem(WALLET_KEY, pubkey);
         setWalletAddress(pubkey);
@@ -41,7 +36,7 @@ export function useWalletAuth() {
       return null;
     } catch (e: any) {
       console.warn('Wallet connect error:', e?.message || e);
-      if (e?.message?.includes('No wallet') || e?.errorCode === 'ERROR_WALLET_NOT_FOUND') {
+      if (e?.message?.includes('No wallet') || e?.message?.includes('not found')) {
         throw new Error('NO_WALLET');
       }
       return null;
