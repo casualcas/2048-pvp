@@ -22,11 +22,21 @@ export function useWalletAuth() {
             icon: 'https://casualcas.github.io/2048-pvp/assets/icon.png',
           },
         });
+        console.log('Auth result:', JSON.stringify(authResult.accounts[0]));
         const address = authResult.accounts[0].address;
-        const pubkeyBytes = Buffer.from(address, 'base64');
-        return new PublicKey(pubkeyBytes).toBase58();
+        console.log('Address type:', typeof address, 'value:', address);
+        try {
+          const pubkeyBytes = Buffer.from(address, 'base64');
+          const pk = new PublicKey(pubkeyBytes).toBase58();
+          console.log('Pubkey:', pk);
+          return pk;
+        } catch(e) {
+          console.log('Buffer decode failed, trying direct:', e);
+          return address as string;
+        }
       });
       const pubkey = result as string;
+      console.log('Final pubkey:', pubkey);
       await AsyncStorage.setItem(WALLET_KEY, pubkey);
       setWalletAddress(pubkey);
       return pubkey;
