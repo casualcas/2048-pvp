@@ -30,6 +30,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.pvp2048.app"/>
+        <data android:scheme="exp+2048-pvp"/>
       </intent-filter>
       <intent-filter android:autoVerify="true" data-generated="true">
         <action android:name="android.intent.action.VIEW"/>

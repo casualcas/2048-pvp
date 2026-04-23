@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { OnboardingScreen } from './src/screens/OnboardingScreen';
@@ -113,6 +116,7 @@ export default function App() {
   }
 
   return (
+    <QueryClientProvider client={queryClient}>
     <LanguageProvider>
     <SettingsProvider>
     <SafeAreaProvider>
@@ -356,6 +360,7 @@ export default function App() {
     </SafeAreaProvider>
     </SettingsProvider>
     </LanguageProvider>
+    </QueryClientProvider>
   );
 }
 
