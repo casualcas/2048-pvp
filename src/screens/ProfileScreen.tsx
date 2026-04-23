@@ -115,9 +115,10 @@ export function ProfileScreen({ player, onBack, onNicknameChange, onAchievements
                 </TouchableOpacity>
               )}
               <Text style={styles.eloText}>⚡ {player.elo} ELO</Text>
-            <TouchableOpacity onPress={onSkins} style={styles.achBtn}>
+            {/* Tile Skins hidden for Saga version */}
+            {false && <TouchableOpacity onPress={onSkins} style={styles.achBtn}>
               <Text style={styles.achBtnText}>🎨 Tile Skins</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
 
             <TouchableOpacity onPress={onAchievements} style={styles.achBtn}>
               <Text style={styles.achBtnText}>🏅 {unlockedCount}/{totalAchievements} Achievements</Text>
