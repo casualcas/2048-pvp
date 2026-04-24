@@ -54,7 +54,8 @@ export function ShopModal({ visible, energy, maxEnergy, noAds, onClose, onWatchA
               </View>
             </TouchableOpacity>
 
-            <Text style={styles.sectionTitle}>PURCHASE</Text>
+            {/* Hidden for Saga version - will enable with smart contract */}
+            {false && <><Text style={styles.sectionTitle}>PURCHASE</Text>
 
             <TouchableOpacity onPress={() => onBuy('energy_10')} style={styles.item}>
               <View style={styles.itemLeft}>
@@ -129,6 +130,7 @@ export function ShopModal({ visible, energy, maxEnergy, noAds, onClose, onWatchA
             <View style={styles.footer}>
               <Text style={styles.footerText}>Purchases help support development 🙏</Text>
             </View>
+            </>}
           </ScrollView>
         </View>
       </View>

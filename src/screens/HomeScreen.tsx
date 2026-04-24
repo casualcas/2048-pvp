@@ -56,7 +56,7 @@ export function HomeScreen({ player, energy, maxEnergy, timeUntilRegen, onWatchA
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>2048</Text>
-          <Text style={styles.subtitle}>BATTLE</Text>
+          <Text style={styles.subtitle}>PvP</Text>
         </View>
         <TouchableOpacity onPress={() => setShowLang(true)} style={styles.iconBtn}>
           <Text style={styles.iconBtnText}>🌍</Text>
@@ -112,9 +112,10 @@ export function HomeScreen({ player, energy, maxEnergy, timeUntilRegen, onWatchA
             <Text style={styles.pvpBtnSub}>{t('pvpSub')}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setShowShop(true)} style={styles.shopBtn}>
+          {/* Hidden for Saga version */}
+          {false && <TouchableOpacity onPress={() => setShowShop(true)} style={styles.shopBtn}>
             <Text style={styles.shopBtnText}>🛒 SHOP</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
 
           <View style={styles.row2}>
             <TouchableOpacity onPress={() => setShowBotModal(true)} style={styles.botBtn}>
