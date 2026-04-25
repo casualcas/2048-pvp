@@ -211,12 +211,13 @@ const styles = StyleSheet.create({
   saveBtnText: { color: '#fff', fontWeight: '900', fontSize: 16 },
   eloText: { fontSize: 18, fontWeight: '800', color: theme.colors.accent1 },
   walletBox: {
-    backgroundColor: '#1a1a2e', borderRadius: 14,
+    backgroundColor: '#f0ebe3', borderRadius: 14,
     padding: 14, alignItems: 'center', marginBottom: 8,
+    borderWidth: 2, borderColor: '#e0d6cc',
   },
   walletLabel: { color: '#9945FF', fontSize: 12, fontWeight: '700', letterSpacing: 2 },
-  walletAddr: { color: '#fff', fontSize: 18, fontWeight: '800', marginTop: 4 },
-  walletCopy: { color: '#555', fontSize: 11, marginTop: 4 },
+  walletAddr: { color: '#776e65', fontSize: 18, fontWeight: '800', marginTop: 4 },
+  walletCopy: { color: '#bbada0', fontSize: 11, marginTop: 4 },
   signOutBtn: {
     marginHorizontal: 20, marginBottom: 8, backgroundColor: theme.colors.bgCard,
     borderRadius: 12, paddingVertical: 12, alignItems: 'center',
