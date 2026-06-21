@@ -33,7 +33,7 @@ import { useSettings, SettingsProvider } from './src/hooks/useSettings';
 import { useWalletAuth } from './src/hooks/useWalletAuth';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, AppState } from 'react-native';
 
-type Screen = 'home' | 'matchmaking' | 'pvp' | 'bot' | 'solo' | 'result' | 'leaderboard' | 'settings' | 'privacy' | 'profile' | 'achievements' | 'skins';
+type Screen = 'home' | 'matchmaking' | 'pvp' | 'bot' | 'solo' | 'result' | 'leaderboard' | 'settings' | 'privacy' | 'terms' | 'profile' | 'achievements' | 'skins';
 
 interface MatchData {
   matchId: string;
@@ -286,7 +286,7 @@ export default function App() {
       )}
 
       {screen === 'settings' && (
-        <SettingsScreen onBack={() => setScreen('home')} onPrivacyPolicy={() => setScreen('privacy')} />
+        <SettingsScreen onBack={() => setScreen('home')} onPrivacyPolicy={() => setScreen('privacy')} onTerms={() => setScreen('terms')} />
       )}
 
       
@@ -315,6 +315,9 @@ export default function App() {
 
       {screen === 'privacy' && (
         <PrivacyPolicyScreen onBack={() => setScreen('settings')} />
+      )}
+      {screen === 'terms' && (
+        <PrivacyPolicyScreen onBack={() => setScreen('settings')} url="https://casualcas.github.io/2048-pvp/terms.html" />
       )}
 
       {screen === 'leaderboard' && (

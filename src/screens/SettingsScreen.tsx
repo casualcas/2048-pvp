@@ -9,9 +9,10 @@ import { theme } from '../utils/theme';
 interface Props {
   onBack: () => void;
   onPrivacyPolicy: () => void;
+  onTerms: () => void;
 }
 
-export function SettingsScreen({ onBack, onPrivacyPolicy }: Props) {
+export function SettingsScreen({ onBack, onPrivacyPolicy, onTerms }: Props) {
   const { settings, updateSetting } = useSettings();
   const { t, language } = useLanguage();
   const [showLang, setShowLang] = React.useState(false);
@@ -99,6 +100,16 @@ export function SettingsScreen({ onBack, onPrivacyPolicy }: Props) {
             <View>
               <Text style={styles.rowTitle}>{t('privacyPolicy')}</Text>
               <Text style={styles.rowSub}>{t('privacyPolicySub')}</Text>
+            </View>
+          </View>
+          <Text style={styles.arrow}>›</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onTerms} style={styles.row}>
+          <View style={styles.rowLeft}>
+            <Text style={styles.rowIcon}>📄</Text>
+            <View>
+              <Text style={styles.rowTitle}>Terms of Service</Text>
+              <Text style={styles.rowSub}>User agreement</Text>
             </View>
           </View>
           <Text style={styles.arrow}>›</Text>
